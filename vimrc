@@ -37,7 +37,7 @@ Plugin 'tpope/vim-dispatch'
 " Generic Programming Support 
 Plugin 'jakedouglas/exuberant-ctags'
 Plugin 'honza/vim-snippets'
-Plugin 'Townk/vim-autoclose'
+" Plugin 'Townk/vim-autoclose' conflict with autocomplete
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tobyS/vmustache'
 Plugin 'janko-m/vim-test'
@@ -46,6 +46,8 @@ Plugin 'vim-syntastic/syntastic' "It is not enable for now
 Plugin 'neomake/neomake'
 " enable linuxsty - Linux Kernel Coding Style
 Plugin 'vivien/vim-addon-linux-coding-style'
+Plugin 'chiel92/vim-autoformat'
+
 
 " Markdown / Writting
 Plugin 'reedes/vim-pencil'
@@ -68,6 +70,11 @@ Plugin 'mrtazz/DoxygenToolkit.vim'
 " PHP Support
 Plugin 'phpvim/phpcd.vim'
 Plugin 'tobyS/pdv'
+" C++
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'rip-rip/clang_complete'
+" Python
+Plugin 'klen/python-mode'
 " ------------------------------
 
 " Theme / Interface
@@ -104,7 +111,7 @@ filetype plugin indent on    " required
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 set nowrap
 
-" OSX stupid backspace fix
+" OSX backspace fix
 set backspace=indent,eol,start
 
 " Show linenumbers
@@ -122,12 +129,20 @@ set showmatch
 " Always display the status line
 set laststatus=2
 
+" Always display the tabline, even if there is only one tab
+set showtabline=2
+
+" powerline Settings
+" set  rtp+=/usr/lib/python2.7/dist-packages/powerline/bindings/vim/
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
 " Enable Elite mode, No ARRRROWWS!!!!
 let g:elite_mode=1
 
 " Enable highlighting of the current line
 set cursorline
-
 
 " Theme and Styling 
 syntax on
@@ -154,11 +169,11 @@ nnoremap <silent> <LocalLeader>] :bn
 nnoremap QQ :QuitTab<cr>
 command! QuitTab call s:QuitTab()
 function! s:QuitTab()
-  try
-    tabclose
-  catch /E784/ " Can't close last tab
-    qall
-  endtry
+    try
+        tabclose
+    catch /E784/ " Can't close last tab
+        qall
+    endtry
 endfunction
 
 
@@ -187,9 +202,9 @@ let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 " Vim-pencil Configuration
 augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init()
 augroup END
 
 " Vim-UtilSnips Configuration
@@ -210,10 +225,10 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -222,16 +237,16 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
 " Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
 " AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 1
 
 
 " Enable omni completion.
@@ -244,7 +259,7 @@ autocmd FileType cpp set omnifunc=cppcomplete#CompleteCPP
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
@@ -256,29 +271,29 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " Elixir Tagbar Configuration
 let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records',
-        \ 't:tests'
-    \ ]
-    \ }
+            \ 'ctagstype' : 'elixir',
+            \ 'kinds' : [
+            \ 'f:functions',
+            \ 'functions:functions',
+            \ 'c:callbacks',
+            \ 'd:delegates',
+            \ 'e:exceptions',
+            \ 'i:implementations',
+            \ 'a:macros',
+            \ 'o:operators',
+            \ 'm:modules',
+            \ 'p:protocols',
+            \ 'r:records',
+            \ 't:tests'
+            \ ]
+            \ }
 
 " Fzf Configuration
 " This is the default extra key bindings
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
 
 " Default fzf layout
 " - down / up / left / right
@@ -290,18 +305,18 @@ let g:fzf_layout = { 'window': '-tabnew' }
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -328,7 +343,10 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:AutoClosePumvisible = {"ENTER": "", "ESC": ""}
+
+
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
@@ -364,10 +382,10 @@ autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
-	nnoremap <Up>    :resize +2<CR>
-	nnoremap <Down>  :resize -2<CR>
-	nnoremap <Left>  :vertical resize +2<CR>
-	nnoremap <Right> :vertical resize -2<CR>
+    nnoremap <Up>    :resize +2<CR>
+    nnoremap <Down>  :resize -2<CR>
+    nnoremap <Left>  :vertical resize +2<CR>
+    nnoremap <Right> :vertical resize -2<CR>
 endif
 
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
@@ -414,8 +432,8 @@ let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 " automatically open and close the popup menu / preview window      
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
-set completeopt=menuone,menu,longest,preview
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
+" set completeopt=menuone,menu,longest,preview
 
 " cscope
 set cscopetag
