@@ -20,7 +20,12 @@ os.system("sudo dnf install powerline powerline-fonts")
  fi
 
  >> Enable Powerline for Vim
- set  rtp+=/usr/lib/python2.7/dist-packages/powerline/bindings/vim/
+ >> Already on vimrc
+ " powerline Settings
+ " set  rtp+=/usr/lib/python2.7/dist-packages/powerline/bindings/vim/
+ python3 from powerline.vim import setup as powerline_setup
+ python3 powerline_setup()
+ python3 del powerline_setup
  set laststatus=2
  set t_Co=256
 """
