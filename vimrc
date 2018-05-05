@@ -35,25 +35,27 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-dispatch'
 
 " Generic Programming Support 
-Plugin 'jakedouglas/exuberant-ctags'
-Plugin 'honza/vim-snippets'
+" Plugin 'jakedouglas/exuberant-ctags'
+" Plugin 'honza/vim-snippets'
+
 " Plugin 'Townk/vim-autoclose' conflict with autocomplete
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tobyS/vmustache'
-Plugin 'janko-m/vim-test'
+" Plugin 'janko-m/vim-test'
 Plugin 'maksimr/vim-jsbeautify'
-Plugin 'vim-syntastic/syntastic' "It is not enable for now
-Plugin 'neomake/neomake'
+" Plugin 'vim-syntastic/syntastic' "It is not enable for now
+" Plugin 'neomake/neomake'
 " enable linuxsty - Linux Kernel Coding Style
 Plugin 'vivien/vim-addon-linux-coding-style'
 Plugin 'chiel92/vim-autoformat'
-
 
 " Markdown / Writting
 Plugin 'reedes/vim-pencil'
 Plugin 'tpope/vim-markdown'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'LanguageTool'
+" Dont forget Download LanguageTool -> https://www.languagetool.org/download/LanguageTool-4.1.zip
+:let g:languagetool_jar='$HOME/LanguageTool-4.1/languagetool-commandline.jar'
 
 " Git Support
 Plugin 'kablamo/vim-git-log'
@@ -84,7 +86,7 @@ Plugin 'ryanoasis/vim-webdevicons'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sjl/badwolf'
-Plugin 'tomasr/molokai'
+"Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'junegunn/limelight.vim'
