@@ -1,9 +1,9 @@
 """""""""""""""""""""""""""""""""""""
-" Herbert Vimrc configuration 
+" Herbert Vimrc configuration
 """""""""""""""""""""""""""""""""""""
 set encoding=utf8 " required in vim-devicons
 
-"""" START Vundle Configuration 
+"""" START Vundle Configuration
 
 " Disable file type for vundle
 filetype off                   " required
@@ -15,8 +15,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+"
+Plugin 'rhysd/vim-clang-format'
+
 " Utility
-" enable NERD tree - allows you to explore your filesystem 
+" enable NERD tree - allows you to explore your filesystem
 " and to open files and directories.
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
@@ -34,7 +37,7 @@ Plugin 'gilsondev/searchtasks.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-dispatch'
 
-" Generic Programming Support 
+" Generic Programming Support
 " Plugin 'jakedouglas/exuberant-ctags'
 " Plugin 'honza/vim-snippets'
 
@@ -104,7 +107,7 @@ Plugin 'colepeters/spacemacs-theme.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-"""" END Vundle Configuration 
+"""" END Vundle Configuration
 
 
 """""""""""""""""""""""""""""""""""""
@@ -146,7 +149,7 @@ let g:elite_mode=1
 " Enable highlighting of the current line
 set cursorline
 
-" Theme and Styling 
+" Theme and Styling
 syntax on
 set t_Co=256
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -160,10 +163,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type= 2
 let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 1
 let g:airline_theme='hybrid'
 let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 
+let g:hybrid_reduced_contrast = 1
 " To change tabs And with \[ or \] you can easily switch between buffers.
 nnoremap <silent> <LocalLeader>[ :bp
 nnoremap <silent> <LocalLeader>] :bn
@@ -378,7 +381,7 @@ inoremap <expr> <c-k> ("\<C-p>")
 " omap <leader><tab> <plug>(fzf-maps-o)
 
 " Shortcuts
-nnoremap <Leader>o :Files<CR> 
+nnoremap <Leader>o :Files<CR>
 nnoremap <Leader>O :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
 
@@ -442,17 +445,17 @@ let g:DoxygenToolkit_authorName="Herbert Rocha <herberthb12@gmail.com>"
 let g:DoxygenToolkit_licenseTag="UFRR"
 
 " OmniCppComplete options
-let OmniCpp_NamespaceSearch = 1      
-let OmniCpp_GlobalScopeSearch = 1      
-let OmniCpp_ShowAccess = 1      
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_MayCompleteDot = 1      
-let OmniCpp_MayCompleteArrow = 1      
-let OmniCpp_MayCompleteScope = 1      
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
-" automatically open and close the popup menu / preview window      
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
+" automatically open and close the popup menu / preview window
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " set completeopt=menuone,menu,longest,preview
 
 " cscope
@@ -460,3 +463,6 @@ set cscopetag
 
 " tags definition
 set tags+=tags;                     " search tags automagically
+
+map <C-I> :py3f /home/hrocha/Documents/clang-format.py<CR>
+imap <C-I> <ESC>:py3f /home/hrocha/Documents/clang-format.py<CR>i
